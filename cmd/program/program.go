@@ -67,6 +67,7 @@ type Docker struct {
 // in the Project folder, and is specific to a Framework
 type Templater interface {
 	Main() []byte
+	Config() []byte
 	Server() []byte
 	Routes() []byte
 	TestHandler() []byte
@@ -427,6 +428,20 @@ func (p *Project) CreateMainFile() error {
 	// inject makefile template
 	makeFileTemplate := template.Must(template.New("makefile").Parse(string(framework.MakeTemplate())))
 	err = makeFileTemplate.Execute(makeFile, p)
+	if err != nil {
+		return err
+	}
+
+	configFile, err := os.Create(filepath.Join(projectPath, configsPath, "config.go"))
+	if err != nil {
+		return err
+	}
+
+	defer configFile.Close()
+
+	// inject makefile template
+	configFileTemplate := template.Must(template.New("config.go").Parse(string(framework.ConfigTemplate())))
+	err = configFileTemplate.Execute(configFile, p)
 	if err != nil {
 		return err
 	}

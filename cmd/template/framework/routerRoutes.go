@@ -19,6 +19,11 @@ type RouterTemplates struct{}
 func (r RouterTemplates) Main() []byte {
 	return mainTemplate
 }
+
+func (r RouterTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (r RouterTemplates) Server() []byte {
 	return standardServerTemplate
 }

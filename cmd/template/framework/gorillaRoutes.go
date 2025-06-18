@@ -20,6 +20,10 @@ func (g GorillaTemplates) Main() []byte {
 	return mainTemplate
 }
 
+func (g GorillaTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (g GorillaTemplates) Server() []byte {
 	return standardServerTemplate
 }

@@ -23,6 +23,10 @@ func (s StandardLibTemplate) Main() []byte {
 	return mainTemplate
 }
 
+func (s StandardLibTemplate) Config() []byte {
+	return configTemplate
+}
+
 func (s StandardLibTemplate) Server() []byte {
 	return standardServerTemplate
 }

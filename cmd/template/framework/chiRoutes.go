@@ -20,6 +20,10 @@ func (c ChiTemplates) Main() []byte {
 	return mainTemplate
 }
 
+func (c ChiTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (c ChiTemplates) Server() []byte {
 	return standardServerTemplate
 }

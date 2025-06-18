@@ -1,0 +1,16 @@
+package config
+
+type Config struct {
+	Server   ServerConfig   `validate:"required"`
+	Logging  LoggingConfig  `validate:"required"`
+}
+
+type ServerConfig struct {
+	Port string `validate:"required"`
+	Host string `validate:"required"`
+}
+
+type LoggingConfig struct {
+	Level  string `validate:"required,oneof=debug info warn error"`
+	Format string `validate:"required,oneof=json text"`
+}

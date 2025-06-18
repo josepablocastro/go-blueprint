@@ -20,6 +20,10 @@ func (g GinTemplates) Main() []byte {
 	return mainTemplate
 }
 
+func (g GinTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (g GinTemplates) Server() []byte {
 	return standardServerTemplate
 }

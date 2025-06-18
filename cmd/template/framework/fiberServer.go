@@ -25,6 +25,11 @@ type FiberTemplates struct{}
 func (f FiberTemplates) Main() []byte {
 	return fiberMainTemplate
 }
+
+func (f FiberTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (f FiberTemplates) Server() []byte {
 	return fiberServerTemplate
 }

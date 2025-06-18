@@ -19,6 +19,11 @@ type EchoTemplates struct{}
 func (e EchoTemplates) Main() []byte {
 	return mainTemplate
 }
+
+func (e EchoTemplates) Config() []byte {
+	return configTemplate
+}
+
 func (e EchoTemplates) Server() []byte {
 	return standardServerTemplate
 }

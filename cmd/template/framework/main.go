@@ -21,10 +21,17 @@ var makeTemplate []byte
 //go:embed files/gitignore.tmpl
 var gitIgnoreTemplate []byte
 
+//go:embed files/configs/config.go.tmpl
+var configTemplate []byte
+
 // MakeTemplate returns a byte slice that represents
 // the default Makefile template.
 func MakeTemplate() []byte {
 	return makeTemplate
+}
+
+func ConfigTemplate() []byte {
+	return configTemplate
 }
 
 func GitIgnoreTemplate() []byte {
