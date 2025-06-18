@@ -113,11 +113,18 @@ var (
 
 const (
 	root                 = "/"
-	cmdApiPath           = "cmd/api"
+	cmdApiPath           = "cmd/app"
 	cmdWebPath           = "cmd/web"
-	internalServerPath   = "internal/server"
-	internalDatabasePath = "internal/database"
+	internalServerPath   = "internal/delivery"
+	internalDatabasePath = "internal/repository"
 	gitHubActionPath     = ".github/workflows"
+	internalDomainPath   = "internal/domain"
+	internalUsecasePath  = "internal/usecase"
+	pkgPath              = "pkg"
+	configsPath          = "configs"
+	deploymentsPath      = "deployments"
+	scriptsPath          = "scripts"
+	docsPath             = "docs"
 )
 
 // CheckOs checks Operation system and generates MakeFile and `go build` command
@@ -364,6 +371,42 @@ func (p *Project) CreateMainFile() error {
 	}
 
 	err = p.CreatePath(cmdApiPath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(internalDomainPath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(internalUsecasePath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(pkgPath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(configsPath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(scriptsPath, projectPath)
+	if err != nil {
+		log.Printf("Error creating path: %s", projectPath)
+		return err
+	}
+
+	err = p.CreatePath(docsPath, projectPath)
 	if err != nil {
 		log.Printf("Error creating path: %s", projectPath)
 		return err
@@ -830,7 +873,7 @@ func (p *Project) CreateViteReactProject(projectPath string) error {
 	}
 
 	frontendPath := filepath.Join(projectPath, "frontend")
-	if err := os.MkdirAll(frontendPath, 0755); err != nil {
+	if err := os.MkdirAll(frontendPath, 0o755); err != nil {
 		return fmt.Errorf("failed to create frontend directory: %w", err)
 	}
 
@@ -839,11 +882,11 @@ func (p *Project) CreateViteReactProject(projectPath string) error {
 	}
 
 	srcDir := filepath.Join(frontendPath, "src")
-	if err := os.MkdirAll(srcDir, 0755); err != nil {
+	if err := os.MkdirAll(srcDir, 0o755); err != nil {
 		return fmt.Errorf("failed to create src directory: %w", err)
 	}
 
-	if err := os.WriteFile(filepath.Join(srcDir, "App.tsx"), advanced.ReactAppfile(), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(srcDir, "App.tsx"), advanced.ReactAppfile(), 0o644); err != nil {
 		return fmt.Errorf("failed to write App.tsx template: %w", err)
 	}
 
@@ -870,7 +913,7 @@ func (p *Project) CreateViteReactProject(projectPath string) error {
 
 	// Use a template to generate the frontend .env file
 	frontendEnvContent := fmt.Sprintf("VITE_PORT=%s\n", vitePort)
-	if err := os.WriteFile(filepath.Join(frontendPath, ".env"), []byte(frontendEnvContent), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(frontendPath, ".env"), []byte(frontendEnvContent), 0o644); err != nil {
 		return fmt.Errorf("failed to create frontend .env file: %w", err)
 	}
 
@@ -888,21 +931,21 @@ func (p *Project) CreateViteReactProject(projectPath string) error {
 		}
 
 		// Create the vite + react + Tailwind v4 configuration
-		if err := os.WriteFile(filepath.Join(frontendPath, "vite.config.ts"), advanced.ViteTailwindConfigFile(), 0644); err != nil {
+		if err := os.WriteFile(filepath.Join(frontendPath, "vite.config.ts"), advanced.ViteTailwindConfigFile(), 0o644); err != nil {
 			return fmt.Errorf("failed to write vite.config.ts: %w", err)
 		}
 
 		srcDir := filepath.Join(frontendPath, "src")
-		if err := os.MkdirAll(srcDir, 0755); err != nil {
+		if err := os.MkdirAll(srcDir, 0o755); err != nil {
 			return fmt.Errorf("failed to create src directory: %w", err)
 		}
 
-		err = os.WriteFile(filepath.Join(srcDir, "index.css"), advanced.InputCssTemplateReact(), 0644)
+		err = os.WriteFile(filepath.Join(srcDir, "index.css"), advanced.InputCssTemplateReact(), 0o644)
 		if err != nil {
 			return fmt.Errorf("failed to update index.css: %w", err)
 		}
 
-		if err := os.WriteFile(filepath.Join(srcDir, "App.tsx"), advanced.ReactTailwindAppfile(), 0644); err != nil {
+		if err := os.WriteFile(filepath.Join(srcDir, "App.tsx"), advanced.ReactTailwindAppfile(), 0o644); err != nil {
 			return fmt.Errorf("failed to write App.tsx template: %w", err)
 		}
 

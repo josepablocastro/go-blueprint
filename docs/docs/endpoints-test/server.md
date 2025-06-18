@@ -33,8 +33,8 @@ make run
  - using env:   export GIN_MODE=release
  - using code:  gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /                         --> websocket-test/internal/server.(*Server).HelloWorldHandler-fm (3 handlers)
-[GIN-debug] GET    /health                   --> websocket-test/internal/server.(*Server).healthHandler-fm (3 handlers)
-[GIN-debug] GET    /websocket                --> websocket-test/internal/server.(*Server).websocketHandler-fm (3 handlers)
+[GIN-debug] GET    /                         --> websocket-test/internal/delivery.(*Server).HelloWorldHandler-fm (3 handlers)
+[GIN-debug] GET    /health                   --> websocket-test/internal/delivery.(*Server).healthHandler-fm (3 handlers)
+[GIN-debug] GET    /websocket                --> websocket-test/internal/delivery.(*Server).websocketHandler-fm (3 handlers)
 [GIN] 2024/05/28 - 17:44:31 | 200 |       27.93µs |       127.0.0.1 | GET      "/"
 ```

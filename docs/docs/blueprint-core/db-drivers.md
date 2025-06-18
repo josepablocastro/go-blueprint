@@ -9,7 +9,7 @@ To extend the project with database functionality, users can choose from a varie
 
 ## Updated Project Structure
 
-Integrating a database adds a new layer to the project structure, primarily in the `internal/database` directory:
+Integrating a database adds a new layer to the project structure, primarily in the `internal/repository` directory:
 
 ```bash
 /(Root)
@@ -53,7 +53,7 @@ curl -sLO get.docker.com
 
 ### Running the tests
 
-Go to the `internal/database` directory and run the following command:
+Go to the `internal/repository` directory and run the following command:
 
 ```bash
 go test -v
